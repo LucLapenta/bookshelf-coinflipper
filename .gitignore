@@ -1,0 +1,7 @@
+build/
+bootloader/
+modules/
+zephyr/
+tools/
+*.o
+*.so

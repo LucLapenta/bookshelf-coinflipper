@@ -1,0 +1,14 @@
+services:
+  zephyr:
+    image: zephyrprojectrtos/zephyr-build:latest
+    working_dir: /home/user/workspace
+    volumes:
+      # mount source code
+      - type: bind
+        source: ./
+        target: /home/user/workspace
+    privileged: true
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+    command:
+      sleep infinity

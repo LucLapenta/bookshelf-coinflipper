@@ -1,0 +1,4 @@
+west:
+  command: /opt/python/venv/bin/west build -p always -d xiao_rp2040 .
+  topdir: /home/user/workspace
+  version: 1.5.0
