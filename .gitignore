@@ -3,5 +3,7 @@ bootloader/
 modules/
 zephyr/
 tools/
+.west/
+xiao_rp2040/
 *.o
 *.so
