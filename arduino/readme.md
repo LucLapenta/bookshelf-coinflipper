@@ -33,6 +33,9 @@ arduino-cli config add board_manager.additional_urls https://github.com/earlephi
 arduino-cli core update-index
 
 arduino-cli core install rp2040:rp2040
+
+arduino-cli lib install "Adafruit GFX Library"
+arduino-cli lib install "Adafruit SSD1306"
 ```
 
 
