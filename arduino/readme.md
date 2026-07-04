@@ -35,4 +35,27 @@ arduino-cli core update-index
 arduino-cli core install rp2040:rp2040
 ```
 
+
+### 4. Build project
+
+from the `./arduino` folder run:
+```
+arduino-cli compile --fqbn rp2040:rp2040:seeed_xiao_rp2040 bookshelf-coinflipper
+```
+
+### 5. Flashing:
+
+To flash the compiled project to the board, set the board into bootloader mode by:
+1. press and hold the BOOT button
+2. press and hold the RESET button
+3. release the RESET button
+4. release the BOOT button
+
+You should see the device connect to the PC as a USB mass storage device
+
+run
+```
+arduino-cli upload -p UF2_Board --fqbn rp2040:rp2040:seeed_xiao_rp2040 bookshelf-coinflipper
+```
+
 ## Notes
