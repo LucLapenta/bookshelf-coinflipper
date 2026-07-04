@@ -11,6 +11,11 @@
 
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
+int switchPin = D1;
+int switchValue = 1; // start at 1 to match default value of PULLUP pin
+int lastSwitchValue = 1;
+long randomNumber = 0;
+
 void setup() {
   Serial.begin(9600);
   if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
@@ -19,6 +24,9 @@ void setup() {
   }
 
   display.clearDisplay();
+
+  pinMode(switchPin, INPUT_PULLUP);
+  randomSeed(analogRead(0));
 }
 
 void loop() {
@@ -30,6 +38,36 @@ void loop() {
   display.println(F("Press to Flip"));
   display.display();
   delay(500);
+
+  switchValue = digitalRead(switchPin);
+  Serial.println(F("Switch value:"));
+  Serial.println(switchValue);
+  Serial.println(lastSwitchValue);
   
+  // check for transition from LOW to HIGH for button release
+  if(switchValue == 1 && lastSwitchValue == 0) {
+    randomNumber = random(100);
+    display.clearDisplay();
+    display.setTextSize(2);
+    display.setTextColor(SSD1306_WHITE);
+    display.setCursor(10, 0);
+    display.println(F("FLIPPING"));
+    display.display();
+    delay(500);
+
+    display.clearDisplay();
+    display.setTextSize(2);
+    display.setTextColor(SSD1306_WHITE);
+    display.setCursor(10, 0);
+    if(randomNumber > 50) {
+      display.println(F("HEADS"));
+    }
+    else {
+      display.println(F("TAILS"));
+    }
+    display.display();
+    delay(2500);
+  }
+  lastSwitchValue = switchValue;
 
 }

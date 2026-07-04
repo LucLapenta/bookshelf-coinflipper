@@ -41,9 +41,9 @@ arduino-cli lib install "Adafruit SSD1306"
 
 ### 4. Build project
 
-from the `./arduino` folder run:
+from the root folder run:
 ```
-arduino-cli compile --fqbn rp2040:rp2040:seeed_xiao_rp2040 bookshelf-coinflipper
+arduino-cli compile --fqbn rp2040:rp2040:seeed_xiao_rp2040 arduino
 ```
 
 ### 5. Flashing:
@@ -58,7 +58,7 @@ You should see the device connect to the PC as a USB mass storage device
 
 run
 ```
-arduino-cli upload -p UF2_Board --fqbn rp2040:rp2040:seeed_xiao_rp2040 bookshelf-coinflipper
+arduino-cli upload -p UF2_Board --fqbn rp2040:rp2040:seeed_xiao_rp2040 arduino
 ```
 
 ## Notes
