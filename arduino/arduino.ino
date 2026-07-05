@@ -3,6 +3,8 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
+#include "images.h"
+
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 
@@ -54,13 +56,21 @@ void loop() {
 }
 
 void displayFlippingAnimation() {
-  display.clearDisplay();
-  display.setTextSize(2);
-  display.setTextColor(SSD1306_WHITE);
-  display.setCursor(10, 0);
-  display.println(F("FLIPPING"));
-  display.display();
-  delay(500);
+  for(int i = 0; i < 4; i++) {
+    for(int j = 0; j < 9; j++) {
+      display.clearDisplay();
+      display.drawBitmap(
+        44,
+        12,
+        epd_bitmap_allArray[j],
+        40,
+        40,
+        1
+      );
+      display.display();
+      delay(50);
+    }
+  }
   return;
 }
 
