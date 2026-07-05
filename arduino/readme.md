@@ -6,12 +6,13 @@ This directory contains source code and setup instctions to build the bookshelf 
 
 ### 1. Install initial dependencies
 
+*This project was developed using ubuntu 24 and does not currently provide instructions for using other operating systems.*
+
 ```
 # ensure local bin directory exists
 mkdir -p ~/.local/bin
 
 # setup arduino cli
-
 curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | BINDIR=~/.local/bin sh
 ```
 
@@ -38,7 +39,6 @@ arduino-cli lib install "Adafruit GFX Library"
 arduino-cli lib install "Adafruit SSD1306"
 ```
 
-
 ### 4. Build project
 
 from the root folder run:
@@ -60,5 +60,3 @@ run
 ```
 arduino-cli upload -p UF2_Board --fqbn rp2040:rp2040:seeed_xiao_rp2040 arduino
 ```
-
-## Notes
