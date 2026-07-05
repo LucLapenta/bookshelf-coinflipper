@@ -46,28 +46,36 @@ void loop() {
   
   // check for transition from LOW to HIGH for button release
   if(switchValue == 1 && lastSwitchValue == 0) {
+    displayFlippingAnimation();   
     randomNumber = random(100);
-    display.clearDisplay();
-    display.setTextSize(2);
-    display.setTextColor(SSD1306_WHITE);
-    display.setCursor(10, 0);
-    display.println(F("FLIPPING"));
-    display.display();
-    delay(500);
-
-    display.clearDisplay();
-    display.setTextSize(2);
-    display.setTextColor(SSD1306_WHITE);
-    display.setCursor(10, 0);
-    if(randomNumber > 50) {
-      display.println(F("HEADS"));
-    }
-    else {
-      display.println(F("TAILS"));
-    }
-    display.display();
-    delay(2500);
+    displayResult();
   }
   lastSwitchValue = switchValue;
+}
 
+void displayFlippingAnimation() {
+  display.clearDisplay();
+  display.setTextSize(2);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(10, 0);
+  display.println(F("FLIPPING"));
+  display.display();
+  delay(500);
+  return;
+}
+
+void displayResult() {
+  display.clearDisplay();
+  display.setTextSize(2);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(10, 0);
+  if(randomNumber > 50) {
+    display.println(F("HEADS"));
+  }
+  else {
+    display.println(F("TAILS"));
+  }
+  display.display();
+  delay(2500);
+  return;
 }
