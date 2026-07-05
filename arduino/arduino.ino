@@ -17,7 +17,7 @@ int switchPin = D1;
 int switchValue = 1; // start at 1 to match default value of PULLUP pin
 int lastSwitchValue = 1;
 
-void displayText(const char* text, int delayMs=0, int textSize=2, int xCoord=10, int yCoord=0);
+void displayText(const char* text, int delayMs=0, int textSize=2, int xCoord=0, int yCoord=0);
 
 void setup() {
   Serial.begin(9600);
@@ -35,7 +35,7 @@ void setup() {
 
 void loop() {
   
-  displayText("Press to Flip", 500);
+  displayText("Press to \nFlip", 500);
 
   switchValue = digitalRead(switchPin);
   
