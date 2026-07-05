@@ -16,7 +16,8 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 int switchPin = D1;
 int switchValue = 1; // start at 1 to match default value of PULLUP pin
 int lastSwitchValue = 1;
-long randomNumber = 0;
+
+void displayText(const char* text, int delayMs=0, int textSize=2, int xCoord=10, int yCoord=0);
 
 void setup() {
   Serial.begin(9600);
@@ -27,30 +28,22 @@ void setup() {
 
   display.clearDisplay();
 
+  // use PULLUP mode so default value is HIGH (3.3V), then when button is pressed the value goes to LOW (0V)
   pinMode(switchPin, INPUT_PULLUP);
-  randomSeed(analogRead(0));
+  randomSeed(rp2040.hwrand32());
 }
 
 void loop() {
   
-  display.clearDisplay();
-  display.setTextSize(2);
-  display.setTextColor(SSD1306_WHITE);
-  display.setCursor(10, 0);
-  display.println(F("Press to Flip"));
-  display.display();
-  delay(500);
+  displayText("Press to Flip", 500);
 
   switchValue = digitalRead(switchPin);
-  Serial.println(F("Switch value:"));
-  Serial.println(switchValue);
-  Serial.println(lastSwitchValue);
   
   // check for transition from LOW to HIGH for button release
   if(switchValue == 1 && lastSwitchValue == 0) {
     displayFlippingAnimation();   
-    randomNumber = random(100);
     displayResult();
+    delay(5000);
   }
   lastSwitchValue = switchValue;
 }
@@ -75,12 +68,9 @@ void displayFlippingAnimation() {
 }
 
 void displayResult() {
-  display.clearDisplay();
-  display.setTextSize(2);
-  display.setTextColor(SSD1306_WHITE);
-  display.setCursor(10, 0);
+  int randomNumber = random(100);
   if(randomNumber > 50) {
-    display.println(F("HEADS"));
+    displayText("HEADS");
     display.drawBitmap(
       44,
       18,
@@ -91,7 +81,7 @@ void displayResult() {
     );
   }
   else {
-    display.println(F("TAILS"));
+    displayText("TAILS");
     display.drawBitmap(
       44,
       18,
@@ -102,6 +92,15 @@ void displayResult() {
     );
   }
   display.display();
-  delay(5000);
   return;
+}
+
+void displayText(const char* text, int delayMs, int textSize, int xCoord, int yCoord) {
+  display.clearDisplay();
+  display.setTextSize(textSize);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(xCoord, yCoord);
+  display.println(F(text));
+  display.display();
+  delay(delayMs);
 }
