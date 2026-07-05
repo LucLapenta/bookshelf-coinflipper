@@ -81,11 +81,27 @@ void displayResult() {
   display.setCursor(10, 0);
   if(randomNumber > 50) {
     display.println(F("HEADS"));
+    display.drawBitmap(
+      44,
+      18,
+      epd_bitmap_allArray[0],
+      40,
+      40,
+      1
+    );
   }
   else {
     display.println(F("TAILS"));
+    display.drawBitmap(
+      44,
+      18,
+      epd_bitmap_allArray[5],
+      40,
+      40,
+      1
+    );
   }
   display.display();
-  delay(2500);
+  delay(5000);
   return;
 }
